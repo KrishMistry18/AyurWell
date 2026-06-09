@@ -1,7 +1,13 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Compatibility() {
+  const { user } = useAuth();
+  const username = user?.name || user?.username || "Prana Seeker";
+  const initials = username.slice(0, 2).toUpperCase();
+  const dosha = localStorage.getItem("userDosha") || "Vata-Pitta";
+
   useEffect(() => {
     document.title = "AyurWell | Dosha Compatibility & Social Planner";
   }, []);
@@ -42,7 +48,7 @@ export default function Compatibility() {
         </div>
         <div className="flex items-center gap-4">
           <span className="material-symbols-outlined p-2 text-[#0f5238] hover:bg-[#e7e3ca]/50 transition-colors rounded-full cursor-pointer">notifications</span>
-          <span className="material-symbols-outlined p-2 text-[#0f5238] hover:bg-[#e7e3ca]/50 transition-colors rounded-full cursor-pointer">account_circle</span>
+          <Link to="/dashboard" className="material-symbols-outlined p-2 text-[#0f5238] hover:bg-[#e7e3ca]/50 transition-colors rounded-full cursor-pointer">account_circle</Link>
         </div>
       </header>
 
@@ -52,11 +58,11 @@ export default function Compatibility() {
           <div className="p-8 space-y-2">
             <div className="flex items-center gap-4 mb-6">
               <div className="w-12 h-12 rounded-full bg-[#b1f0ce] overflow-hidden ring-2 ring-[#0f5238]/20 flex items-center justify-center text-[#0f5238] font-bold text-xl">
-                KM
+                {initials}
               </div>
               <div>
-                <h3 className="font-display text-[18px] text-[#0f5238] font-semibold">Prana Seeker</h3>
-                <p className="text-[12px] text-[#404943]">Vata-Pitta Balance</p>
+                <h3 className="font-display text-[18px] text-[#0f5238] font-semibold">{username}</h3>
+                <p className="text-[12px] text-[#404943]">{dosha} Balance</p>
               </div>
             </div>
             <nav className="space-y-1">

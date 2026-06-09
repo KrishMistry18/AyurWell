@@ -20,11 +20,13 @@ export default function Navbar() {
   const navigate = useNavigate();
   const { theme, setTheme } = useTheme();
 
-  // Read auth variables from localStorage
+  const { user } = useAuth();
+  
+  // Read auth variables from localStorage (fallback)
   const token = localStorage.getItem("token") || localStorage.getItem("auth_token");
-  const isAuthenticated = Boolean(token);
+  const isAuthenticated = Boolean(user) || Boolean(token);
   const userDosha = localStorage.getItem("userDosha");
-  const username = localStorage.getItem("username") || "AyurWell Member";
+  const username = user?.name || user?.username || localStorage.getItem("username") || "AyurWell Member";
   const isDemoMode = localStorage.getItem("demoMode") === "true";
 
   useEffect(() => {
@@ -68,8 +70,15 @@ export default function Navbar() {
     return <Laptop className="w-4 h-4 text-zinc-500" />;
   };
 
-  // Nav links
+  // Desktop top nav links
   const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/features", label: "Features" },
+    { href: "/dashboard", label: "Dashboard" },
+  ];
+
+  // Mobile menu links (all features)
+  const mobileNavLinks = [
     { href: "/", label: "Home" },
     { href: "/features", label: "Features" },
     { href: "/dashboard", label: "Dashboard" },
@@ -320,7 +329,7 @@ export default function Navbar() {
         <div className="fixed inset-x-0 top-16 bottom-0 z-40 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-lg flex flex-col p-6 border-b border-primary/10 shadow-lg md:hidden animate-fade-in overflow-y-auto">
           {/* Navigation Links list */}
           <nav className="flex flex-col gap-6 flex-1 pt-4">
-            {navLinks.map((link) => {
+            {mobileNavLinks.map((link) => {
               const active =
                 link.href === "/"
                   ? location.pathname === "/"

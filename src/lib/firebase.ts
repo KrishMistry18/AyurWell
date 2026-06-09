@@ -3,13 +3,13 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  // IMPORTANT: Replace with your actual Firebase Web API Key
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "YOUR_FIREBASE_API_KEY",
+  apiKey: "AIzaSyDbLW4u88uwzUPrfgMNgfbL8pOwUTdRYi4",
   authDomain: "ayurwell-d8f6c.firebaseapp.com",
   projectId: "ayurwell-d8f6c",
   storageBucket: "ayurwell-d8f6c.firebasestorage.app",
-  messagingSenderId: "1234567890", // Replace if needed
-  appId: "1:1234567890:web:abcdef" // Replace if needed
+  messagingSenderId: "585638389735",
+  appId: "1:585638389735:web:64bea76d635ce9f06cbf42",
+  measurementId: "G-FTPGK6LZP7"
 };
 
 // Initialize Firebase

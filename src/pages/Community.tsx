@@ -1,7 +1,13 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Community() {
+  const { user } = useAuth();
+  const username = user?.name || user?.username || "Prana Seeker";
+  const initials = username.slice(0, 2).toUpperCase();
+  const dosha = localStorage.getItem("userDosha") || "Vata-Pitta";
+
   useEffect(() => {
     document.title = "AyurWell - Community Feed";
   }, []);
@@ -52,7 +58,7 @@ export default function Community() {
         </div>
         <div className="flex items-center gap-4">
           <span className="material-symbols-outlined text-[#0f5238] cursor-pointer hover:bg-[#e7e3ca]/50 p-2 rounded-full transition-colors">notifications</span>
-          <span className="material-symbols-outlined text-[#0f5238] cursor-pointer hover:bg-[#e7e3ca]/50 p-2 rounded-full transition-colors">account_circle</span>
+          <Link to="/dashboard" className="material-symbols-outlined text-[#0f5238] cursor-pointer hover:bg-[#e7e3ca]/50 p-2 rounded-full transition-colors">account_circle</Link>
         </div>
       </header>
 
@@ -61,10 +67,10 @@ export default function Community() {
         <aside className="hidden md:flex flex-col h-full w-80 bg-[#fefae0] border-r border-[#bfc9c1]/30 shadow-xl shadow-[#0f5238]/5 overflow-y-auto">
           <div className="p-8 flex flex-col items-center border-b border-[#bfc9c1]/20">
             <div className="w-20 h-20 rounded-full bg-[#b1f0ce] flex items-center justify-center mb-4 ring-4 ring-[#2d6a4f]/10">
-              <span className="font-display text-[32px] font-semibold text-[#0f5238]">KM</span>
+              <span className="font-display text-[32px] font-semibold text-[#0f5238]">{initials}</span>
             </div>
-            <h3 className="font-display text-[24px] font-semibold text-[#0f5238]">Prana Seeker</h3>
-            <p className="text-[#404943] text-[16px]">Vata-Pitta Balance</p>
+            <h3 className="font-display text-[24px] font-semibold text-[#0f5238]">{username}</h3>
+            <p className="text-[#404943] text-[16px]">{dosha} Balance</p>
           </div>
           <nav className="flex-1 px-4 py-6 space-y-2">
             <Link to="/dashboard" className="flex items-center gap-4 px-4 py-3 text-[#404943] hover:bg-[#2d6a4f]/10 rounded-xl transition-all">

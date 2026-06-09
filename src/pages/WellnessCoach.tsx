@@ -77,26 +77,21 @@ const WellnessCoach = () => {
   }, []);
 
   useEffect(() => {
-    if (!token || historyLoaded) return;
-    fetch(`${API_BASE_URL}/api/coach/history/`, { headers: { Authorization: `Token ${token}` } })
-      .then((r) => r.json())
-      .then((data) => {
-        if (Array.isArray(data) && data.length > 0) {
-          setMessages(
-            data.map((m: any) => ({
-              role: m.role,
-              content: m.content,
-              ts: new Date(m.created_at).getTime(),
-            })),
-          );
-        }
-        setHistoryLoaded(true);
-      })
-      .catch(() => setHistoryLoaded(true));
-  }, [token, historyLoaded]);
+    // Load history from localStorage instead of backend
+    if (!historyLoaded) {
+      const saved = localStorage.getItem("coach_history");
+      if (saved) {
+        setMessages(JSON.parse(saved));
+      }
+      setHistoryLoaded(true);
+    }
+  }, [historyLoaded]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messages.length > 0) {
+      localStorage.setItem("coach_history", JSON.stringify(messages));
+    }
   }, [messages, loading]);
 
   const sendMessage = async (text: string) => {
@@ -108,49 +103,27 @@ const WellnessCoach = () => {
     setInput("");
     setLoading(true);
 
-    try {
-      const authHeader = token ? `Token ${token}` : "";
-      const res = await fetch(`${API_BASE_URL}/api/coach/chat/`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", ...(authHeader ? { Authorization: authHeader } : {}) },
-        body: JSON.stringify({
-          message: trimmed,
-          dosha,
-          energy_avg: energyAvg,
-          sleep_avg: sleepAvg,
-          mood_avg: moodAvg,
-          conversation_history: messages.slice(-10).map((m) => ({ role: m.role, content: m.content })),
-        }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        setMessages((prev) => [...prev, { role: "assistant", content: data.reply, ts: Date.now() }]);
-        if (!firstMessageSent && token) {
-          setFirstMessageSent(true);
-          fetch(`${API_BASE_URL}/api/gamification/check/`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json", Authorization: `Token ${token}` },
-          }).catch(() => {});
-        }
+    // Mock AI response
+    setTimeout(() => {
+      let reply = "I hear you. As an Ayurvedic guide, I suggest listening to your body's natural rhythms. ";
+      const lower = trimmed.toLowerCase();
+      
+      if (lower.includes("sleep")) {
+        reply = "For better sleep (Nidra), try drinking warm milk with a pinch of nutmeg before bed, and turn off all screens an hour early to calm your Vata.";
+      } else if (lower.includes("energy")) {
+        reply = "Low energy often means weak digestion (Agni). Try sipping warm ginger tea throughout the day and avoid heavy, cold meals.";
+      } else if (lower.includes("eat")) {
+        reply = "Focus on warm, freshly cooked foods. A simple Kitchari (mung dal and rice) is perfectly balancing for all doshas today.";
+      } else if (lower.includes("dosha")) {
+        reply = `Since your primary constitution is ${dosha}, focus on grounding routines and avoid extreme temperatures or spicy foods that might throw you out of balance.`;
       } else {
-        setMessages((prev) => [
-          ...prev,
-          { role: "assistant", content: "I'm having trouble connecting right now. Please try again.", ts: Date.now() },
-        ]);
+        reply += "Could you tell me a little more about how you're feeling physically right now?";
       }
-    } catch {
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content: "Connection error. Check that the backend is running, or try again shortly.",
-          ts: Date.now(),
-        },
-      ]);
-    } finally {
+
+      setMessages((prev) => [...prev, { role: "assistant", content: reply, ts: Date.now() }]);
       setLoading(false);
       taRef.current?.focus();
-    }
+    }, 1500);
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
