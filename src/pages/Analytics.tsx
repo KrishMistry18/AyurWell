@@ -376,7 +376,7 @@ const Analytics = () => {
                           label={{ value: `avg ${rangeAvgEnergy}`, fontSize: 10, fill: c.primaryLight, position: "top" }}
                         />
                       )}
-                      <Area type="monotone" dataKey="energy" stroke={c.primary} strokeWidth={2} fill={`url(#energyGrad-${isDark})`} connectNulls />
+                      <Area type="monotone" dataKey="energy" stroke={c.primary} strokeWidth={2} fill={`url(#energyGrad-${isDark})`} connectNulls dot={{ r: 4, fill: c.primary, strokeWidth: 0 }} activeDot={{ r: 6 }} />
                     </AreaChart>
                   </ResponsiveContainer>
                 </div>
@@ -445,7 +445,7 @@ const Analytics = () => {
                         strokeDasharray="4 4"
                         label={{ value: "Goal 2L", fontSize: 10, fill: c.accentDark, position: "top" }}
                       />
-                      <Area type="monotone" dataKey="water" stroke={c.accent} strokeWidth={2} fill={`url(#waterGrad-${isDark})`} connectNulls />
+                      <Area type="monotone" dataKey="water" stroke={c.accent} strokeWidth={2} fill={`url(#waterGrad-${isDark})`} connectNulls dot={{ r: 4, fill: c.accent, strokeWidth: 0 }} activeDot={{ r: 6 }} />
                     </AreaChart>
                   </ResponsiveContainer>
                 </div>
