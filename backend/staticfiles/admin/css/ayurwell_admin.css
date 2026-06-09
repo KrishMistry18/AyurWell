@@ -1,0 +1,101 @@
+/* AyurWell Admin — Custom CSS Override */
+:root {
+  --primary: #2D6A4F;
+  --primary-light: #52B788;
+  --accent: #E9C46A;
+  --surface: #FEFAE0;
+}
+
+/* Header */
+#header {
+  background: linear-gradient(135deg, #2D6A4F 0%, #1B4332 100%) !important;
+  color: white !important;
+}
+#header a:link, #header a:visited { color: #B7E4C7 !important; }
+#branding h1 { color: white !important; font-weight: 800; letter-spacing: -0.02em; }
+#branding h1 a:link, #branding h1 a:visited { color: white !important; }
+
+/* Nav */
+div.breadcrumbs { background: #1B4332 !important; color: #B7E4C7 !important; }
+div.breadcrumbs a { color: #74C69D !important; }
+
+/* Sidebar */
+#nav-sidebar { border-right: 1px solid #e5e7eb; }
+.sidebar-toggle-icon { color: #2D6A4F !important; }
+
+/* Module headers */
+.module h2, .module caption, .inline-group h2 {
+  background: #2D6A4F !important;
+  color: white !important;
+  border-radius: 6px 6px 0 0;
+}
+
+/* Buttons */
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+  background: #2D6A4F !important;
+  border-color: #1B4332 !important;
+  color: white !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+}
+.button:hover, input[type=submit]:hover {
+  background: #1B4332 !important;
+}
+.button.default, input[type=submit].default {
+  background: #2D6A4F !important;
+}
+
+/* Links */
+a:link, a:visited { color: #2D6A4F; }
+a:hover { color: #1B4332; }
+
+/* Selected rows */
+tr.selected { background: #D8F3DC !important; }
+.action-select:checked + td { background: #D8F3DC !important; }
+
+/* Pagination */
+.paginator a { color: #2D6A4F !important; }
+.paginator .this-page { background: #2D6A4F !important; color: white !important; border-radius: 4px; }
+
+/* Search */
+#searchbar { border: 2px solid #52B788 !important; border-radius: 8px !important; }
+#searchbar:focus { border-color: #2D6A4F !important; outline: none !important; }
+
+/* Dashboard app list */
+.app-api .section { border-left: 4px solid #2D6A4F; }
+
+/* Change list */
+#changelist-filter h2 { background: #2D6A4F !important; color: white !important; }
+#changelist-filter h3 { color: #2D6A4F !important; font-weight: 700; }
+#changelist-filter li.selected a { color: #2D6A4F !important; font-weight: 700; }
+
+/* Object tools */
+.object-tools a { background: #2D6A4F !important; border-radius: 20px !important; }
+.object-tools a:hover { background: #1B4332 !important; }
+
+/* Success/error messages */
+.messagelist .success { background: #D8F3DC !important; color: #1B4332 !important; border-left: 4px solid #2D6A4F !important; }
+.messagelist .error { border-left: 4px solid #DC2626 !important; }
+.messagelist .warning { border-left: 4px solid #D97706 !important; }
+
+/* Calendar widget */
+.calendarbox h2, .clockbox h2 { background: #2D6A4F !important; }
+td.selected a { background: #2D6A4F !important; }
+
+/* Inline groups */
+.inline-group .tabular tr.has_original td { background: #f9fafb; }
+.inline-group .tabular tr.add-row td { background: #f0fdf4; }
+
+/* Custom dashboard link in nav */
+.ayurwell-dashboard-link {
+  display: block;
+  background: linear-gradient(135deg, #2D6A4F, #52B788);
+  color: white !important;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin: 8px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 13px;
+  text-decoration: none !important;
+}

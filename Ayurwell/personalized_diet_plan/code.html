@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Personalized Diet Plan - AyurWell</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#fefae0",
+                        "tertiary": "#274f3d",
+                        "inverse-surface": "#323120",
+                        "on-secondary-fixed": "#251a00",
+                        "tertiary-fixed": "#c1ecd4",
+                        "surface-tint": "#2c694e",
+                        "secondary-fixed-dim": "#e7c268",
+                        "on-surface-variant": "#404943",
+                        "on-tertiary-fixed-variant": "#274e3d",
+                        "surface": "#fefae0",
+                        "primary": "#0f5238",
+                        "secondary-fixed": "#ffdf96",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dedbc2",
+                        "surface-container-low": "#f8f4db",
+                        "inverse-primary": "#95d4b3",
+                        "on-primary-container": "#a8e7c5",
+                        "tertiary-container": "#3f6754",
+                        "surface-container-highest": "#e7e3ca",
+                        "on-background": "#1d1c0d",
+                        "inverse-on-surface": "#f5f1d8",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#bfc9c1",
+                        "on-error-container": "#93000a",
+                        "outline": "#707973",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#ede9cf",
+                        "secondary": "#765a05",
+                        "on-surface": "#1d1c0d",
+                        "tertiary-fixed-dim": "#a5d0b9",
+                        "primary-container": "#2d6a4f",
+                        "primary-fixed": "#b1f0ce",
+                        "surface-container": "#f2efd5",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#ffd87c",
+                        "on-secondary-fixed-variant": "#5a4400",
+                        "surface-variant": "#e7e3ca",
+                        "background": "#fefae0",
+                        "primary-fixed-dim": "#95d4b3",
+                        "on-tertiary-container": "#b8e3cb",
+                        "on-tertiary-fixed": "#002114",
+                        "on-primary-fixed": "#002114",
+                        "on-primary-fixed-variant": "#0e5138",
+                        "on-secondary-container": "#795d08",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-padding-mobile": "20px",
+                        "gutter": "24px",
+                        "base": "8px",
+                        "section-gap": "80px",
+                        "container-padding-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Playfair Display"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "caption": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Ambient texture overlay for parchment feel */
+        .bg-texture {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased bg-texture min-h-screen pb-24">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-xl docked full-width top-0 sticky shadow-[0_8px_32px_0_rgba(45,106,79,0.05)] z-40 hidden md:block">
+<div class="flex justify-between items-center w-full px-container-desktop max-w-[1280px] mx-auto h-20">
+<div class="font-headline-md text-headline-md text-primary dark:text-primary-fixed font-semibold italic">
+                AyurWell
+            </div>
+<nav class="flex items-center gap-gutter">
+<a class="text-on-surface-variant dark:text-outline hover:text-primary transition-colors duration-300 font-label-md text-label-md hover:opacity-80 transition-all duration-200 active:scale-95 transition-transform" href="#">Home</a>
+<a class="text-on-surface-variant dark:text-outline hover:text-primary transition-colors duration-300 font-label-md text-label-md hover:opacity-80 transition-all duration-200 active:scale-95 transition-transform" href="#">Features</a>
+<a class="text-on-surface-variant dark:text-outline hover:text-primary transition-colors duration-300 font-label-md text-label-md hover:opacity-80 transition-all duration-200 active:scale-95 transition-transform" href="#">Dashboard</a>
+<a class="text-primary dark:text-primary-fixed border-b-2 border-secondary font-semibold pb-1 font-label-md text-label-md hover:opacity-80 transition-all duration-200 active:scale-95 transition-transform" href="#">Diet Plan</a>
+<a class="text-on-surface-variant dark:text-outline hover:text-primary transition-colors duration-300 font-label-md text-label-md hover:opacity-80 transition-all duration-200 active:scale-95 transition-transform" href="#">Analytics</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="font-label-md text-label-md text-primary hover:opacity-80 transition-all duration-200 active:scale-95 transition-transform flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">person</span>
+</button>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-md text-label-md hover:opacity-80 transition-all duration-200 active:scale-95 transition-transform">
+                    Get Started
+                </button>
+</div>
+</div>
+</header>
+<main class="max-w-[1280px] mx-auto px-container-padding-mobile md:px-container-padding-desktop py-8 md:py-12 flex flex-col gap-12">
+<!-- Header & Config Panel -->
+<section class="flex flex-col gap-6">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-primary flex items-center gap-3">
+                        🌿 Your Personalized Plan
+                    </h1>
+<p class="font-body-md text-on-surface-variant mt-2 max-w-2xl">
+                        Curated recipes and meal structures designed to balance your doshas and support your current wellness objectives.
+                    </p>
+</div>
+<div class="inline-flex items-center gap-2 bg-error-container text-on-error-container px-4 py-2 rounded-full shadow-sm w-fit">
+<span class="font-bold text-lg">🔥</span>
+<span class="font-label-md text-label-md font-semibold tracking-wide uppercase">Pitta Dominant</span>
+</div>
+</div>
+<!-- Configuration Bento Box -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Season -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-[0_4px_24px_0_rgba(45,106,79,0.03)] border border-outline-variant/20">
+<h3 class="font-label-md text-label-md text-on-surface-variant mb-4 uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">routine</span> Season
+                    </h3>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-colors">Spring</button>
+<button class="px-4 py-2 rounded-full bg-primary-container text-on-primary-container font-label-md text-label-md shadow-sm ring-1 ring-primary/20">Summer</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-colors">Autumn</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-colors">Winter</button>
+</div>
+</div>
+<!-- Diet Preference -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-[0_4px_24px_0_rgba(45,106,79,0.03)] border border-outline-variant/20">
+<h3 class="font-label-md text-label-md text-on-surface-variant mb-4 uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">restaurant</span> Preference
+                    </h3>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-colors">Vegan</button>
+<button class="px-4 py-2 rounded-full bg-primary-container text-on-primary-container font-label-md text-label-md shadow-sm ring-1 ring-primary/20">Vegetarian</button>
+<button class="px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-high transition-colors">Omnivore</button>
+</div>
+</div>
+<!-- Health Goal -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 shadow-[0_4px_24px_0_rgba(45,106,79,0.03)] border border-outline-variant/20">
+<h3 class="font-label-md text-label-md text-on-surface-variant mb-4 uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">track_changes</span> Primary Goal
+                    </h3>
+<div class="grid grid-cols-2 gap-2">
+<button class="px-3 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md shadow-md text-center">Energy Boost</button>
+<button class="px-3 py-2 rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors text-center border border-outline-variant/30">Detox</button>
+<button class="px-3 py-2 rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors text-center border border-outline-variant/30">Digestion</button>
+<button class="px-3 py-2 rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md hover:bg-surface-container-high transition-colors text-center border border-outline-variant/30">Weight</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Diet Plan Canvas -->
+<section class="flex flex-col gap-8">
+<!-- Day Tabs -->
+<div class="flex overflow-x-auto hide-scrollbar border-b border-outline-variant/30 pb-px">
+<button class="px-6 py-3 font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">Mon</button>
+<button class="px-6 py-3 font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">Tue</button>
+<button class="px-6 py-3 font-label-md text-label-md text-primary border-b-2 border-secondary font-semibold whitespace-nowrap relative">
+                    Wed
+                    <span class="absolute top-2 right-2 w-1.5 h-1.5 bg-secondary rounded-full"></span>
+</button>
+<button class="px-6 py-3 font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">Thu</button>
+<button class="px-6 py-3 font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">Fri</button>
+<button class="px-6 py-3 font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap opacity-50">Sat</button>
+<button class="px-6 py-3 font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap opacity-50">Sun</button>
+</div>
+<!-- Meals List -->
+<div class="flex flex-col gap-6">
+<!-- Breakfast Card -->
+<article class="bg-surface-container-lowest rounded-2xl shadow-[0_8px_32px_0_rgba(45,106,79,0.04)] border border-outline-variant/10 flex flex-col md:flex-row overflow-hidden group">
+<div class="w-full md:w-64 h-48 md:h-auto relative overflow-hidden bg-surface-container-low">
+<img alt="Oatmeal bowl" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A top-down view of a warm, comforting bowl of oatmeal garnished with sliced dates, a sprinkle of ground cardamom, and a splash of almond milk. The bowl sits on a rustic wooden table illuminated by soft, natural morning light. The composition features a clean, minimalist aesthetic with warm earthy tones, reflecting a holistic, Ayurvedic approach to wellness. A subtle, soft green shadow anchors the bowl to the surface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCI1a7xoJOfwyklj4fp96cXJ0aiETxgEHM2YmpTDSPfikJZ_dPgsULAXMyeT-Z8FMoeOEujtk_NAtBXKllNUf3veabET_VdEyMPBY26TbiOOFB4B84GE-3em61OE0HH8AOTXMYU36HAsZzD43oq6grPZwZuvQmFeOUNwEuafxdGXHrMwXZYejpkyNDVUO06tyBrVY3PX94gd4yxO3yHR4iFXcksvAWG1FI2Lwl9_mBcKyBgvZvt4w1HBy2MNQKi_K4B3Z2UxlCfIsY"/>
+<div class="absolute top-3 left-3 bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full font-caption text-caption flex items-center gap-1 shadow-sm backdrop-blur-md bg-opacity-90">
+<span class="material-symbols-outlined text-[14px]">done_all</span> Balances Pitta
+                        </div>
+</div>
+<div class="p-6 md:p-8 flex-1 flex flex-col justify-center">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-1">Breakfast</h4>
+<span class="font-label-md text-label-md text-on-surface-variant bg-surface-container-low px-2 py-1 rounded">320 kcal</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary mb-4">Cooling Oats with Dates &amp; Cardamom</h2>
+<p class="font-body-md text-on-surface-variant mb-6 line-clamp-2">
+                            A soothing, easily digestible start to the day. Cardamom aids digestion while dates provide sustained energy without overheating the system.
+                        </p>
+<div class="mt-auto flex flex-wrap items-center justify-between gap-4 border-t border-outline-variant/20 pt-4">
+<div class="flex gap-2">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                                    P: 8g
+                                </span>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary/10 text-secondary">
+                                    C: 54g
+                                </span>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-tertiary/10 text-tertiary">
+                                    F: 6g
+                                </span>
+</div>
+<button class="text-primary hover:text-secondary font-label-md text-label-md flex items-center gap-1 transition-colors">
+                                View Recipe <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- Lunch Card -->
+<article class="bg-surface-container-lowest rounded-2xl shadow-[0_8px_32px_0_rgba(45,106,79,0.04)] border border-outline-variant/10 flex flex-col md:flex-row overflow-hidden group">
+<div class="w-full md:w-64 h-48 md:h-auto relative overflow-hidden bg-surface-container-low">
+<img alt="Healthy lunch bowl" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A beautifully plated Ayurvedic lunch bowl featuring a vibrant mix of fresh greens, sliced avocado, roasted vegetables, and a scoop of perfectly cooked grains. The dish is presented on a minimalist white ceramic plate, resting on a clean, light-colored surface with subtle textures reminiscent of high-quality parchment. The lighting is bright and airy, casting soft, diffuse shadows that enhance the fresh, organic, and premium feel of the meal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7VsLTrRyfu8UYMhxsorzAFVZAdV4_FrzqOHbG9_nWUx2ElmBv_JPh1GiM1TeX5rg2QP1zNaGO_9qantDWJfMrCclQ3MHQxMvi7qGcbCNiXr5gnsJFgfw85gam87wyZLZ9uc3b-FDlLxLGa8Njs7q828c5wLxQA8mkkp5ADwcXGy4p6wz8h80ohbUEGylzf7ueR9VJ8B4AR1ppWZRleQejguE72jIimuElSAK-rNHurUO8IBzEnobsf_G5lpSCHunWPpdjO6C85lA"/>
+<div class="absolute top-3 left-3 bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full font-caption text-caption flex items-center gap-1 shadow-sm backdrop-blur-md bg-opacity-90">
+<span class="material-symbols-outlined text-[14px]">done_all</span> Balances Pitta
+                        </div>
+</div>
+<div class="p-6 md:p-8 flex-1 flex flex-col justify-center">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-label-md text-label-md text-secondary uppercase tracking-widest mb-1">Lunch</h4>
+<span class="font-label-md text-label-md text-on-surface-variant bg-surface-container-low px-2 py-1 rounded">450 kcal</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary mb-4">Basmati Bowl with Steamed Asparagus</h2>
+<p class="font-body-md text-on-surface-variant mb-6 line-clamp-2">
+                            A grounding mid-day meal. Basmati rice is cooling, while asparagus provides essential bitter and astringent tastes necessary for balancing Pitta during summer.
+                        </p>
+<div class="mt-auto flex flex-wrap items-center justify-between gap-4 border-t border-outline-variant/20 pt-4">
+<div class="flex gap-2">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+                                    P: 14g
+                                </span>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-secondary/10 text-secondary">
+                                    C: 62g
+                                </span>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-tertiary/10 text-tertiary">
+                                    F: 12g
+                                </span>
+</div>
+<button class="text-primary hover:text-secondary font-label-md text-label-md flex items-center gap-1 transition-colors">
+                                View Recipe <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+</section>
+</main>
+<!-- Bottom Action Bar (Sticky) -->
+<div class="fixed bottom-0 left-0 w-full bg-surface/90 backdrop-blur-xl border-t border-outline-variant/20 shadow-[0_-8px_32px_0_rgba(45,106,79,0.05)] z-50">
+<div class="max-w-[1280px] mx-auto px-container-padding-mobile md:px-container-padding-desktop py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+<div class="hidden sm:block">
+<p class="font-label-md text-label-md text-on-surface-variant">Review your plan and save to profile.</p>
+</div>
+<div class="flex items-center gap-4 w-full sm:w-auto">
+<button class="flex-1 sm:flex-none flex justify-center items-center gap-2 px-6 py-3 rounded-full border-2 border-secondary text-secondary font-label-md text-label-md hover:bg-secondary/5 transition-colors">
+<span class="material-symbols-outlined text-[20px]">download</span> Download PDF
+                </button>
+<button class="flex-1 sm:flex-none flex justify-center items-center gap-2 px-8 py-3 rounded-full bg-primary text-on-primary font-label-md text-label-md shadow-lg shadow-primary/20 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[20px]">save</span> Save Plan
+                </button>
+</div>
+</div>
+</div>
+</body></html>

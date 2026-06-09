@@ -1,0 +1,193 @@
+{% extends "admin/base_site.html" %}
+{% block title %}AyurWell Dashboard{% endblock %}
+
+{% block extrastyle %}
+<style>
+  :root { --ayur-green: #2D6A4F; --ayur-light: #52B788; --ayur-accent: #E9C46A; --ayur-surface: #FEFAE0; }
+  .dash-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .stat-card { background: white; border-radius: 12px; padding: 20px; border-left: 4px solid var(--ayur-green); box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+  .stat-card .value { font-size: 2rem; font-weight: 800; color: var(--ayur-green); line-height: 1; }
+  .stat-card .label { font-size: 11px; color: #6B7280; text-transform: uppercase; letter-spacing: .05em; margin-top: 4px; }
+  .dash-card { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 1px 4px rgba(0,0,0,.08); margin-bottom: 20px; }
+  .dash-card h3 { font-size: 14px; font-weight: 700; color: #1A1A2E; margin: 0 0 16px; border-bottom: 2px solid var(--ayur-surface); padding-bottom: 8px; }
+  .dosha-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .dosha-bar .name { width: 60px; font-size: 12px; font-weight: 600; }
+  .dosha-bar .bar-wrap { flex: 1; background: #f3f4f6; border-radius: 99px; height: 18px; overflow: hidden; }
+  .dosha-bar .bar-fill { height: 100%; border-radius: 99px; display: flex; align-items: center; padding-left: 8px; font-size: 10px; color: white; font-weight: 700; transition: width .6s ease; }
+  .dosha-bar .count { width: 40px; text-align: right; font-size: 12px; color: #6B7280; }
+  .activity-bar-wrap { display: flex; align-items: flex-end; gap: 8px; height: 80px; }
+  .activity-bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .activity-bar-col .bar { width: 100%; background: var(--ayur-green); border-radius: 4px 4px 0 0; min-height: 4px; opacity: .85; }
+  .activity-bar-col .day-label { font-size: 10px; color: #6B7280; }
+  .log-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .log-table th { background: var(--ayur-surface); padding: 8px 10px; text-align: left; font-size: 10px; text-transform: uppercase; letter-spacing: .05em; color: #6B7280; }
+  .log-table td { padding: 7px 10px; border-bottom: 1px solid #f3f4f6; }
+  .log-table tr:hover td { background: #fafafa; }
+  .badge-info { display: inline-block; background: var(--ayur-green); color: white; padding: 1px 7px; border-radius: 99px; font-size: 10px; font-weight: 700; }
+  .badge-warn { display: inline-block; background: #D97706; color: white; padding: 1px 7px; border-radius: 99px; font-size: 10px; font-weight: 700; }
+  .badge-err  { display: inline-block; background: #DC2626; color: white; padding: 1px 7px; border-radius: 99px; font-size: 10px; font-weight: 700; }
+  .db-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+  .db-item { background: var(--ayur-surface); border-radius: 8px; padding: 10px 12px; }
+  .db-item .db-val { font-size: 1.4rem; font-weight: 800; color: var(--ayur-green); }
+  .db-item .db-name { font-size: 10px; color: #6B7280; margin-top: 2px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
+</style>
+{% endblock %}
+
+{% block content %}
+<div style="padding: 0 0 32px;">
+
+  <!-- Header -->
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+    <span style="font-size:2rem;">🌿</span>
+    <div>
+      <h1 style="margin:0;font-size:1.6rem;color:#1A1A2E;">AyurWell Dashboard</h1>
+      <p style="margin:0;color:#6B7280;font-size:13px;">Real-time platform analytics</p>
+    </div>
+    <a href="{% url 'admin:index' %}" style="margin-left:auto;background:var(--ayur-green);color:white;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:12px;font-weight:600;">← Back to Admin</a>
+  </div>
+
+  <!-- Today's Stats -->
+  <div class="dash-grid">
+    <div class="stat-card" style="border-color:#2D6A4F">
+      <div class="value">{{ total_users }}</div>
+      <div class="label">👥 Total Users</div>
+    </div>
+    <div class="stat-card" style="border-color:#52B788">
+      <div class="value">{{ new_signups_today }}</div>
+      <div class="label">✨ New Today</div>
+    </div>
+    <div class="stat-card" style="border-color:#E9C46A">
+      <div class="value">{{ active_today }}</div>
+      <div class="label">⚡ Active Today</div>
+    </div>
+    <div class="stat-card" style="border-color:#7B9CBF">
+      <div class="value">{{ logs_today }}</div>
+      <div class="label">📊 Logs Today</div>
+    </div>
+    <div class="stat-card" style="border-color:#E07A5F">
+      <div class="value">{{ total_posts }}</div>
+      <div class="label">💬 Community Posts</div>
+    </div>
+    <div class="stat-card" style="border-color:#6B8F71">
+      <div class="value">{{ total_symptom_checks }}</div>
+      <div class="label">🩺 Symptom Checks</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+
+    <!-- Dosha Distribution -->
+    <div class="dash-card">
+      <h3>🪷 Dosha Distribution</h3>
+      {% if dosha_data %}
+        {% for d in dosha_data %}
+        <div class="dosha-bar">
+          <span class="name">{{ d.dosha }}</span>
+          <div class="bar-wrap">
+            <div class="bar-fill" style="width:{{ d.pct }}%;background:{{ d.color }}">{{ d.pct }}%</div>
+          </div>
+          <span class="count">{{ d.count }}</span>
+        </div>
+        {% endfor %}
+      {% else %}
+        <p style="color:#6B7280;font-size:13px;">No dosha data yet.</p>
+      {% endif %}
+    </div>
+
+    <!-- 7-Day Activity -->
+    <div class="dash-card">
+      <h3>📈 Last 7 Days Activity</h3>
+      <div class="activity-bar-wrap">
+        {% for day in daily_activity %}
+        <div class="activity-bar-col">
+          <div class="bar" style="height:{% if max_activity > 0 %}{{ day.count|floatformat:0 }}{% else %}0{% endif %}px;height:calc({{ day.count }} / {{ max_activity }} * 72px);"></div>
+          <span class="day-label">{{ day.day }}</span>
+        </div>
+        {% endfor %}
+      </div>
+      <p style="font-size:11px;color:#6B7280;margin-top:8px;">API requests per day</p>
+    </div>
+
+  </div>
+
+  <!-- Top Badges -->
+  {% if top_badges %}
+  <div class="dash-card">
+    <h3>🏆 Most Earned Badges</h3>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      {% for b in top_badges %}
+      <div style="background:var(--ayur-surface);border-radius:10px;padding:10px 16px;text-align:center;min-width:100px;">
+        <div style="font-size:1.5rem;">{{ b.badge__icon_emoji }}</div>
+        <div style="font-size:11px;font-weight:700;color:#1A1A2E;margin-top:4px;">{{ b.badge__name }}</div>
+        <div style="font-size:10px;color:#6B7280;">{{ b.earned_count }} users</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- DB Stats -->
+  <div class="dash-card">
+    <h3>🗄️ Database Records</h3>
+    <div class="db-grid">
+      {% for model_name, count in db_stats.items %}
+      <div class="db-item">
+        <div class="db-val">{{ count }}</div>
+        <div class="db-name">{{ model_name }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Recent Audit Logs -->
+  <div class="dash-card">
+    <h3>🔍 Recent Activity Log</h3>
+    <div style="overflow-x:auto;">
+      <table class="log-table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Severity</th>
+            <th>User</th>
+            <th>Event</th>
+            <th>Method</th>
+            <th>Path</th>
+            <th>Status</th>
+            <th>ms</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for log in recent_logs %}
+          <tr>
+            <td style="white-space:nowrap;color:#6B7280;">{{ log.created_at|date:"M d H:i" }}</td>
+            <td>
+              {% if log.severity == "error" %}<span class="badge-err">ERR</span>
+              {% elif log.severity == "warning" %}<span class="badge-warn">WARN</span>
+              {% else %}<span class="badge-info">INFO</span>{% endif %}
+            </td>
+            <td>{{ log.user.username|default:"anon" }}</td>
+            <td style="font-size:11px;">{{ log.event_type }}</td>
+            <td><code style="font-size:10px;background:#f3f4f6;padding:1px 4px;border-radius:4px;">{{ log.request_method }}</code></td>
+            <td style="font-size:11px;color:#6B7280;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ log.request_path }}</td>
+            <td>
+              {% if log.status_code %}
+                <span style="font-weight:700;color:{% if log.status_code < 300 %}#059669{% elif log.status_code < 500 %}#D97706{% else %}#DC2626{% endif %}">{{ log.status_code }}</span>
+              {% else %}—{% endif %}
+            </td>
+            <td style="color:#6B7280;">{{ log.response_time_ms|default:"—" }}</td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="8" style="text-align:center;color:#6B7280;padding:20px;">No audit logs yet.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:12px;">
+      <a href="{% url 'admin:api_auditlog_changelist' %}" style="font-size:12px;color:var(--ayur-green);font-weight:600;">View all audit logs →</a>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

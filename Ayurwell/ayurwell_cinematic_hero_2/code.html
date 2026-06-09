@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AyurWell - Discover Your Dosha</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,600&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#fefae0",
+                        "tertiary": "#274f3d",
+                        "inverse-surface": "#323120",
+                        "on-secondary-fixed": "#251a00",
+                        "tertiary-fixed": "#c1ecd4",
+                        "surface-tint": "#2c694e",
+                        "secondary-fixed-dim": "#e7c268",
+                        "on-surface-variant": "#404943",
+                        "on-tertiary-fixed-variant": "#274e3d",
+                        "surface": "#fefae0",
+                        "primary": "#0f5238",
+                        "secondary-fixed": "#ffdf96",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dedbc2",
+                        "surface-container-low": "#f8f4db",
+                        "inverse-primary": "#95d4b3",
+                        "on-primary-container": "#a8e7c5",
+                        "tertiary-container": "#3f6754",
+                        "surface-container-highest": "#e7e3ca",
+                        "on-background": "#1d1c0d",
+                        "inverse-on-surface": "#f5f1d8",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#bfc9c1",
+                        "on-error-container": "#93000a",
+                        "outline": "#707973",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#ede9cf",
+                        "secondary": "#765a05",
+                        "on-surface": "#1d1c0d",
+                        "tertiary-fixed-dim": "#a5d0b9",
+                        "primary-container": "#2d6a4f",
+                        "primary-fixed": "#b1f0ce",
+                        "surface-container": "#f2efd5",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#ffd87c",
+                        "on-secondary-fixed-variant": "#5a4400",
+                        "surface-variant": "#e7e3ca",
+                        "background": "#fefae0",
+                        "primary-fixed-dim": "#95d4b3",
+                        "on-tertiary-container": "#b8e3cb",
+                        "on-tertiary-fixed": "#002114",
+                        "on-primary-fixed": "#002114",
+                        "on-primary-fixed-variant": "#0e5138",
+                        "on-secondary-container": "#795d08",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-padding-mobile": "20px",
+                        "gutter": "24px",
+                        "base": "8px",
+                        "section-gap": "80px",
+                        "container-padding-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Playfair Display"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "caption": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+                    },
+                    "animation": {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 2s infinite',
+                        'float-slow': 'float 8s ease-in-out 1s infinite',
+                    },
+                    "keyframes": {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .grain-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+        .mandala-bg {
+            background-image: radial-gradient(circle at top right, rgba(45, 106, 79, 0.06) 0%, transparent 60%);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased overflow-x-hidden relative min-h-screen">
+<div class="grain-overlay"></div>
+<!-- TopNavBar (JSON Injected) -->
+<nav class="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(45,106,79,0.05)] docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center w-full px-container-desktop max-w-[1280px] mx-auto h-20">
+<div class="font-headline-md text-headline-md text-primary dark:text-primary-fixed font-semibold italic">AyurWell</div>
+<ul class="hidden md:flex gap-8">
+<li><a class="text-primary dark:text-primary-fixed border-b-2 border-secondary font-semibold pb-1 font-label-md text-label-md hover:opacity-80 transition-all duration-200 active:scale-95 transition-transform" href="#">Home</a></li>
+<li><a class="text-on-surface-variant dark:text-outline hover:text-primary transition-colors duration-300 font-label-md text-label-md hover:opacity-80 transition-all duration-200 active:scale-95 transition-transform" href="#">Features</a></li>
+<li><a class="text-on-surface-variant dark:text-outline hover:text-primary transition-colors duration-300 font-label-md text-label-md hover:opacity-80 transition-all duration-200 active:scale-95 transition-transform" href="#">Dashboard</a></li>
+<li><a class="text-on-surface-variant dark:text-outline hover:text-primary transition-colors duration-300 font-label-md text-label-md hover:opacity-80 transition-all duration-200 active:scale-95 transition-transform" href="#">Diet Plan</a></li>
+<li><a class="text-on-surface-variant dark:text-outline hover:text-primary transition-colors duration-300 font-label-md text-label-md hover:opacity-80 transition-all duration-200 active:scale-95 transition-transform" href="#">Analytics</a></li>
+</ul>
+<div class="flex items-center gap-4">
+<button class="hidden md:flex bg-primary-container text-on-primary-container font-label-md text-label-md px-6 py-2 rounded-full hover:opacity-80 transition-all duration-200 active:scale-95 transition-transform">Get Started</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-300 hover:opacity-80 transition-all duration-200 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">person</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<main class="relative w-full min-h-[calc(100vh-80px)] flex flex-col lg:flex-row px-container-mobile lg:px-container-desktop max-w-[1440px] mx-auto mandala-bg">
+<!-- Left Content (55%) -->
+<div class="w-full lg:w-[55%] flex flex-col justify-center pt-16 lg:pt-0 pb-12 lg:pb-0 z-10 relative">
+<div class="inline-flex items-center gap-2 bg-surface-container-low border border-primary-container/20 rounded-full px-4 py-1.5 mb-8 w-fit shadow-[0_4px_12px_rgba(45,106,79,0.08)]">
+<span class="text-primary text-sm">🌿</span>
+<span class="font-label-md text-label-md text-tertiary">Ancient Wisdom • Modern Science</span>
+</div>
+<h1 class="font-display-lg-mobile lg:font-display-lg text-display-lg-mobile lg:text-display-lg text-on-surface mb-6 flex flex-col gap-2">
+<span>Discover Your</span>
+<span class="text-primary text-5xl lg:text-7xl italic font-bold tracking-tight">Dosha.</span>
+<span>Transform Your Life.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-10 leading-relaxed">
+                Unlock personalized wellness plans rooted in 5,000 years of Ayurvedic tradition, elevated by modern health analytics.
+            </p>
+<div class="flex flex-col sm:flex-row gap-4 mb-12">
+<button class="bg-gradient-to-r from-[#1B4332] to-[#2D6A4F] text-white font-label-md text-label-md px-8 py-4 rounded-full shadow-[0_8px_24px_rgba(45,106,79,0.3)] hover:shadow-[0_12px_32px_rgba(45,106,79,0.4)] hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2">
+                    Take Free Assessment
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+<button class="bg-transparent border border-outline-variant text-on-surface font-label-md text-label-md px-8 py-4 rounded-full hover:bg-surface-container-low transition-all duration-300 flex items-center justify-center">
+                    Explore Plans
+                </button>
+</div>
+<div class="flex flex-wrap gap-6 items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+<span class="font-caption text-caption text-on-surface-variant font-medium">Free Assessment</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+<span class="font-caption text-caption text-on-surface-variant font-medium">Personalized Plans</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+<span class="font-caption text-caption text-on-surface-variant font-medium">Evidence-Based</span>
+</div>
+</div>
+</div>
+<!-- Right Visual (45%) -->
+<div class="w-full lg:w-[45%] relative h-[500px] lg:h-auto flex items-center justify-center z-10 perspective-1000">
+<!-- Vata Card (Back Left) -->
+<div class="absolute glass-panel rounded-2xl p-6 w-64 shadow-[0_16px_40px_rgba(45,106,79,0.05)] transform -translate-x-20 -translate-y-16 lg:-translate-x-32 lg:-translate-y-24 rotate-[-6deg] animate-float-delayed z-10 bg-gradient-to-br from-blue-50/60 to-transparent">
+<div class="flex items-center justify-between mb-4">
+<span class="text-3xl">🌬️</span>
+<div class="w-8 h-8 rounded-full bg-blue-100/50 flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-800 text-sm">air</span>
+</div>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Vata</h3>
+<p class="font-caption text-caption text-on-surface-variant">Air &amp; Space</p>
+<div class="mt-4 h-1 w-full bg-blue-100 rounded-full overflow-hidden">
+<div class="h-full bg-blue-400 w-3/4"></div>
+</div>
+</div>
+<!-- Pitta Card (Foreground Center) -->
+<div class="absolute glass-panel rounded-2xl p-8 w-72 shadow-[0_24px_48px_rgba(118,90,5,0.08)] transform translate-y-4 lg:translate-y-8 z-30 animate-float bg-gradient-to-br from-[#FFF8E7]/80 to-[#FEFAE0]/90 border border-secondary/20">
+<div class="flex items-center justify-between mb-6">
+<span class="text-4xl">🔥</span>
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary text-base">local_fire_department</span>
+</div>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-secondary mb-2">Pitta</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Fire &amp; Water</p>
+<div class="flex items-center justify-between font-caption text-caption text-on-surface-variant mb-2">
+<span>Metabolism</span>
+<span class="font-medium text-secondary">High</span>
+</div>
+<div class="h-1.5 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[85%]"></div>
+</div>
+</div>
+<!-- Kapha Card (Back Right) -->
+<div class="absolute glass-panel rounded-2xl p-6 w-64 shadow-[0_16px_40px_rgba(45,106,79,0.05)] transform translate-x-20 translate-y-24 lg:translate-x-32 lg:translate-y-32 rotate-[4deg] animate-float-slow z-20 bg-gradient-to-br from-primary-container/10 to-transparent">
+<div class="flex items-center justify-between mb-4">
+<span class="text-3xl">🌿</span>
+<div class="w-8 h-8 rounded-full bg-primary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm">water_drop</span>
+</div>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Kapha</h3>
+<p class="font-caption text-caption text-on-surface-variant">Earth &amp; Water</p>
+<div class="mt-4 h-1 w-full bg-primary-container/20 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-2/3"></div>
+</div>
+</div>
+<!-- Abstract background element for depth -->
+<div class="absolute w-96 h-96 bg-primary-container/5 rounded-full blur-3xl -z-10 animate-pulse"></div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AyurWell API — v1.0.0</title>
+  <link rel="icon" href="https://raw.githubusercontent.com/twitter/twemoji/master/assets/svg/1f33f.svg" />
+  <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5/swagger-ui.css" />
+  <style>
+    /* ── AyurWell Brand Override ── */
+    :root {
+      --ayur-green: #2D6A4F;
+      --ayur-light: #52B788;
+      --ayur-accent: #E9C46A;
+      --ayur-surface: #FEFAE0;
+    }
+
+    * { box-sizing: border-box; }
+
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f8faf9; }
+
+    /* Custom header */
+    #ayurwell-header {
+      background: linear-gradient(135deg, #2D6A4F 0%, #1B4332 100%);
+      color: white;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.2);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    #ayurwell-header .logo { font-size: 1.8rem; }
+    #ayurwell-header .title { font-size: 1.2rem; font-weight: 800; letter-spacing: -0.02em; }
+    #ayurwell-header .subtitle { font-size: 11px; opacity: .7; margin-top: 2px; }
+    #ayurwell-header .badge {
+      margin-left: auto;
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.3);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    #ayurwell-header .links { display: flex; gap: 12px; }
+    #ayurwell-header .links a {
+      color: #B7E4C7;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    #ayurwell-header .links a:hover { color: white; }
+
+    /* Auth hint banner */
+    #auth-hint {
+      background: #FEFAE0;
+      border-bottom: 1px solid #E9C46A;
+      padding: 10px 24px;
+      font-size: 13px;
+      color: #92400E;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #auth-hint code {
+      background: #FEF3C7;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 12px;
+    }
+
+    /* Swagger UI overrides */
+    .swagger-ui .topbar { display: none !important; }
+    .swagger-ui .info { margin: 20px 0 !important; }
+    .swagger-ui .info .title { color: var(--ayur-green) !important; font-size: 1.8rem !important; }
+    .swagger-ui .info .title small { background: var(--ayur-green) !important; }
+
+    /* Tag headers */
+    .swagger-ui .opblock-tag {
+      border-bottom: 2px solid #e5e7eb !important;
+      color: var(--ayur-green) !important;
+      font-weight: 700 !important;
+    }
+    .swagger-ui .opblock-tag:hover { background: #f0fdf4 !important; }
+
+    /* Operation blocks */
+    .swagger-ui .opblock.opblock-post .opblock-summary { border-color: var(--ayur-green) !important; }
+    .swagger-ui .opblock.opblock-post { border-color: var(--ayur-green) !important; background: rgba(45,106,79,.04) !important; }
+    .swagger-ui .opblock.opblock-get .opblock-summary { border-color: #2563EB !important; }
+    .swagger-ui .opblock.opblock-get { border-color: #2563EB !important; background: rgba(37,99,235,.04) !important; }
+
+    /* Execute button */
+    .swagger-ui .btn.execute {
+      background: var(--ayur-green) !important;
+      border-color: var(--ayur-green) !important;
+      color: white !important;
+      border-radius: 6px !important;
+      font-weight: 600 !important;
+    }
+    .swagger-ui .btn.execute:hover { background: #1B4332 !important; }
+
+    /* Authorize button */
+    .swagger-ui .btn.authorize {
+      color: var(--ayur-green) !important;
+      border-color: var(--ayur-green) !important;
+      border-radius: 6px !important;
+      font-weight: 600 !important;
+    }
+    .swagger-ui .btn.authorize svg { fill: var(--ayur-green) !important; }
+
+    /* Models section */
+    .swagger-ui section.models { border: 1px solid #e5e7eb !important; border-radius: 8px !important; }
+    .swagger-ui section.models h4 { color: var(--ayur-green) !important; }
+
+    /* Response codes */
+    .swagger-ui .response-col_status { color: var(--ayur-green) !important; font-weight: 700 !important; }
+
+    /* Links */
+    .swagger-ui a { color: var(--ayur-green) !important; }
+
+    /* Input fields */
+    .swagger-ui input[type=text], .swagger-ui textarea, .swagger-ui select {
+      border: 1px solid #d1d5db !important;
+      border-radius: 6px !important;
+    }
+    .swagger-ui input[type=text]:focus, .swagger-ui textarea:focus {
+      border-color: var(--ayur-green) !important;
+      outline: none !important;
+      box-shadow: 0 0 0 2px rgba(45,106,79,.15) !important;
+    }
+
+    /* Wrapper */
+    #swagger-ui { max-width: 1200px; margin: 0 auto; padding: 0 16px 40px; }
+  </style>
+</head>
+<body>
+
+  <!-- AyurWell Header -->
+  <div id="ayurwell-header">
+    <span class="logo">🌿</span>
+    <div>
+      <div class="title">AyurWell API</div>
+      <div class="subtitle">Personalized Ayurvedic Wellness Platform</div>
+    </div>
+    <div class="links">
+      <a href="/api/redoc/">ReDoc View</a>
+      <a href="/api/schema/">Download Schema</a>
+      <a href="/admin/">Admin Panel</a>
+    </div>
+    <span class="badge">v1.0.0</span>
+  </div>
+
+  <!-- Auth hint -->
+  <div id="auth-hint">
+    <span>🔐</span>
+    <span>
+      Most endpoints require authentication. Click <strong>Authorize</strong> and enter:
+      <code>Token &lt;your-token&gt;</code> — get a token via
+      <code>POST /api/auth/login/</code>
+    </span>
+  </div>
+
+  <div id="swagger-ui"></div>
+
+  <script src="https://unpkg.com/swagger-ui-dist@5/swagger-ui-bundle.js"></script>
+  <script src="https://unpkg.com/swagger-ui-dist@5/swagger-ui-standalone-preset.js"></script>
+  <script>
+    window.onload = () => {
+      SwaggerUIBundle({
+        url: "{{ schema_url }}",
+        dom_id: '#swagger-ui',
+        presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
+        layout: "StandaloneLayout",
+        deepLinking: true,
+        persistAuthorization: true,
+        displayOperationId: false,
+        defaultModelsExpandDepth: 1,
+        defaultModelExpandDepth: 2,
+        docExpansion: "list",
+        filter: true,
+        tryItOutEnabled: true,
+        requestInterceptor: (req) => {
+          // Auto-add Content-Type for POST requests
+          if (req.method !== 'GET' && !req.headers['Content-Type']) {
+            req.headers['Content-Type'] = 'application/json';
+          }
+          return req;
+        },
+      });
+    };
+  </script>
+</body>
+</html>

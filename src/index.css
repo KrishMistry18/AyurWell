@@ -1,127 +1,623 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* AyurTrack Design System - Ayurvedic Wellness + Modern Nutrition
-All colors MUST be HSL.
-*/
-
+/* ─── CSS Variables ─────────────────────────────────────────── */
 @layer base {
   :root {
-    /* Base colors - soft, natural palette */
-    --background: 48 100% 99%;
-    --foreground: 25 35% 15%;
-
-    /* Card system - warm, welcoming */
-    --card: 48 50% 98%;
-    --card-foreground: 25 35% 15%;
-
-    /* Popover elements */
-    --popover: 48 50% 98%;
-    --popover-foreground: 25 35% 15%;
-
-    /* Primary - Ayurvedic healing orange */
-    --primary: 25 85% 55%;
-    --primary-foreground: 48 100% 99%;
-    --primary-glow: 25 75% 65%;
-
-    /* Secondary - Calming sage green */
-    --secondary: 120 25% 85%;
-    --secondary-foreground: 25 35% 15%;
-
-    /* Muted - Soft earth tones */
+    --background: 54 100% 97%;
+    --foreground: 240 35% 14%;
+    --card: 54 60% 98%;
+    --card-foreground: 240 35% 14%;
+    --popover: 54 60% 98%;
+    --popover-foreground: 240 35% 14%;
+    --primary: 152 41% 30%;
+    --primary-foreground: 54 100% 97%;
+    --secondary: 45 30% 88%;
+    --secondary-foreground: 240 35% 14%;
     --muted: 45 20% 92%;
-    --muted-foreground: 25 15% 45%;
-
-    /* Accent - Wellness green */
-    --accent: 120 40% 70%;
-    --accent-foreground: 25 35% 15%;
-
-    /* Destructive - Warm red */
+    --muted-foreground: 220 9% 46%;
+    --accent: 43 75% 66%;
+    --accent-foreground: 240 35% 14%;
     --destructive: 0 75% 60%;
-    --destructive-foreground: 48 100% 99%;
-
-    /* Borders and inputs - natural, soft */
+    --destructive-foreground: 54 100% 97%;
     --border: 45 25% 88%;
     --input: 45 25% 88%;
-    --ring: 25 85% 55%;
-
+    --ring: 152 41% 30%;
     --radius: 0.75rem;
-    
-    /* Custom gradients for wellness */
-    --gradient-wellness: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-calm: linear-gradient(180deg, hsl(var(--accent) / 0.1), hsl(var(--secondary) / 0.1));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--primary) / 0.9), hsl(var(--accent) / 0.7));
-    
-    /* Shadows for depth */
-    --shadow-wellness: 0 10px 30px -5px hsl(var(--primary) / 0.2);
-    --shadow-soft: 0 4px 20px -4px hsl(25 25% 50% / 0.15);
-    
-    /* Animations */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-    --sidebar-background: 0 0% 98%;
+    /* Ayurvedic palette */
+    --color-primary: #2D6A4F;
+    --color-primary-light: #52B788;
+    --color-primary-dark: #1B4332;
+    --color-accent: #E9C46A;
+    --color-accent-dark: #F4A261;
+    --color-surface: #FEFAE0;
+    --color-surface-dark: #F5ECD7;
+    --color-text-primary: #1A1A2E;
+    --color-text-muted: #6B7280;
+    --color-dosha-vata: #7B9CBF;
+    --color-dosha-pitta: #E07A5F;
+    --color-dosha-kapha: #6B8F71;
 
+    --sidebar-background: 54 60% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
+    --sidebar-primary: 152 41% 30%;
+    --sidebar-primary-foreground: 54 100% 97%;
+    --sidebar-accent: 45 20% 92%;
     --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-border: 45 25% 88%;
+    --sidebar-ring: 152 41% 30%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 240 35% 8%;
+    --foreground: 54 100% 97%;
+    --card: 240 30% 10%;
+    --card-foreground: 54 100% 97%;
+    --popover: 240 30% 10%;
+    --popover-foreground: 54 100% 97%;
+    --primary: 152 41% 45%;
+    --primary-foreground: 240 35% 8%;
+    --secondary: 240 20% 18%;
+    --secondary-foreground: 54 100% 97%;
+    --muted: 240 20% 18%;
+    --muted-foreground: 220 9% 65%;
+    --accent: 43 75% 66%;
+    --accent-foreground: 240 35% 8%;
+    --destructive: 0 62.8% 40%;
+    --destructive-foreground: 54 100% 97%;
+    --border: 240 20% 18%;
+    --input: 240 20% 18%;
+    --ring: 152 41% 45%;
+    --sidebar-background: 240 30% 10%;
+    --sidebar-foreground: 54 100% 97%;
+    --sidebar-primary: 152 41% 45%;
+    --sidebar-primary-foreground: 240 35% 8%;
+    --sidebar-accent: 240 20% 18%;
+    --sidebar-accent-foreground: 54 100% 97%;
+    --sidebar-border: 240 20% 18%;
+    --sidebar-ring: 152 41% 45%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Ayurvedic palette — dark mode */
+    --color-primary: #52B788;
+    --color-primary-light: #74C69D;
+    --color-primary-dark: #2D6A4F;
+    --color-accent: #E9C46A;
+    --color-accent-dark: #F4A261;
+    --color-surface: #1A1A2E;
+    --color-surface-dark: #16213E;
+    --color-card: #0F3460;
+    --color-text-primary: #E8E8E8;
+    --color-text-muted: #A0A0A0;
+    --color-border: rgba(255,255,255,0.1);
+    --color-dosha-vata: #7B9CBF;
+    --color-dosha-pitta: #E07A5F;
+    --color-dosha-kapha: #6B8F71;
   }
 }
 
+/* ─── Base Styles ───────────────────────────────────────────── */
 @layer base {
   * {
     @apply border-border;
   }
 
-  body {
-    @apply bg-background text-foreground;
+  html {
+    scroll-behavior: smooth;
   }
+
+  body {
+    @apply bg-surface text-text-primary font-sans;
+    background-color: var(--color-surface);
+    color: var(--color-text-primary);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Leaf watermark pattern */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath d='M40 5 C20 5 5 20 5 40 C5 20 20 5 40 5Z' fill='%232D6A4F'/%3E%3Cpath d='M40 5 C60 5 75 20 75 40 C75 20 60 5 40 5Z' fill='%232D6A4F'/%3E%3Cpath d='M40 75 C20 75 5 60 5 40 C5 60 20 75 40 75Z' fill='%232D6A4F'/%3E%3Cpath d='M40 75 C60 75 75 60 75 40 C75 60 60 75 40 75Z' fill='%232D6A4F'/%3E%3Ccircle cx='40' cy='40' r='3' fill='%232D6A4F'/%3E%3C/svg%3E");
+    background-size: 80px 80px;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-surface-dark);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-primary-light);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
+  }
+}
+
+/* ─── Component Classes ─────────────────────────────────────── */
+@layer components {
+
+  /* Ambient helpers from Stitch design */
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+  .glass-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(45, 106, 79, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(45, 106, 79, 0.05);
+  }
+  .grain-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    opacity: 0.4;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+    z-index: 0;
+  }
+  .mandala-bg {
+    background-image: radial-gradient(circle at top right, rgba(45, 106, 79, 0.06) 0%, transparent 60%);
+  }
+  .bg-texture {
+    position: relative;
+  }
+  .bg-texture::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle at center, rgba(45, 106, 79, 0.03) 0%, transparent 60%),
+                      radial-gradient(circle at center, rgba(118, 90, 5, 0.02) 20%, transparent 80%);
+    background-size: 100% 100%;
+    z-index: 0;
+  }
+  .texture-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+    opacity: 0.03;
+    z-index: 1;
+  }
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  /* Cards */
+  .ayur-card {
+    background: rgba(254, 250, 224, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(45, 106, 79, 0.12);
+    border-radius: 1rem;
+    box-shadow: 0 4px 24px -4px rgba(26, 26, 46, 0.08);
+    transition: all 0.2s ease-in-out;
+  }
+  .ayur-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px -8px rgba(26, 26, 46, 0.14);
+  }
+
+  /* Buttons */
+  .ayur-btn-primary {
+    background: linear-gradient(135deg, #2D6A4F, #52B788);
+    color: #FEFAE0;
+    border-radius: 9999px;
+    padding: 0.625rem 1.75rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 4px 20px -4px rgba(45, 106, 79, 0.4);
+    transition: all 0.2s ease-in-out;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .ayur-btn-primary:hover {
+    box-shadow: 0 8px 30px -4px rgba(45, 106, 79, 0.5);
+    transform: translateY(-1px);
+  }
+  .ayur-btn-primary:active {
+    transform: scale(0.97);
+  }
+
+  .ayur-btn-accent {
+    background: linear-gradient(135deg, #E9C46A, #F4A261);
+    color: #1A1A2E;
+    border-radius: 9999px;
+    padding: 0.625rem 1.75rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 4px 20px -4px rgba(233, 196, 106, 0.5);
+    transition: all 0.2s ease-in-out;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .ayur-btn-accent:hover {
+    box-shadow: 0 8px 30px -4px rgba(233, 196, 106, 0.6);
+    transform: translateY(-1px);
+  }
+  .ayur-btn-accent:active {
+    transform: scale(0.97);
+  }
+
+  .ayur-btn-ghost {
+    background: transparent;
+    color: var(--color-primary);
+    border: 1px solid rgba(45, 106, 79, 0.2);
+    border-radius: 9999px;
+    padding: 0.625rem 1.75rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .ayur-btn-ghost:hover {
+    background: rgba(45, 106, 79, 0.05);
+    border-color: var(--color-primary);
+    transform: translateY(-1px);
+  }
+  .dark .ayur-btn-ghost {
+    color: var(--color-primary-light);
+    border-color: rgba(82, 183, 136, 0.2);
+  }
+  .dark .ayur-btn-ghost:hover {
+    background: rgba(82, 183, 136, 0.05);
+    border-color: var(--color-primary-light);
+  }
+
+  .ayur-input {
+    background: rgba(254, 250, 224, 0.5);
+    border: 1px solid rgba(45, 106, 79, 0.15);
+    border-radius: 0.5rem;
+    padding: 0.625rem 1rem;
+    font-family: 'Inter', sans-serif;
+    color: var(--color-text-primary);
+    transition: all 0.2s ease-in-out;
+    width: 100%;
+  }
+  .ayur-input:focus {
+    outline: none;
+    border-color: var(--color-primary) !important;
+    background: rgba(254, 250, 224, 0.9);
+    box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.12) !important;
+  }
+  .dark .ayur-input {
+    background: rgba(15, 52, 96, 0.4);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-text-primary);
+  }
+  .dark .ayur-input:focus {
+    border-color: var(--color-primary-light) !important;
+    background: rgba(15, 52, 96, 0.7);
+    box-shadow: 0 0 0 3px rgba(82, 183, 136, 0.15) !important;
+  }
+
+  /* Typography */
+  .ayur-heading {
+    font-family: 'Playfair Display', Georgia, serif;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+  }
+
+  /* Section divider */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(45, 106, 79, 0.2), transparent);
+  }
+  .section-divider-lotus {
+    color: #2D6A4F;
+    opacity: 0.5;
+    font-size: 1.25rem;
+  }
+
+  /* Page transition */
+  .page-transition {
+    animation: page-enter 0.3s ease-out;
+  }
+
+  /* Input focus glow */
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #2D6A4F !important;
+    box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.12) !important;
+  }
+
+  /* Button micro-interactions */
+  button:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+
+  /* Card hover */
+  .hover-lift {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px -8px rgba(26, 26, 46, 0.14);
+  }
+
+  /* Dosha badges */
+  .badge-vata {
+    background: rgba(123, 156, 191, 0.15);
+    color: #4a7fa5;
+    border: 1px solid rgba(123, 156, 191, 0.3);
+    border-radius: 9999px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .badge-pitta {
+    background: rgba(224, 122, 95, 0.15);
+    color: #c45a3a;
+    border: 1px solid rgba(224, 122, 95, 0.3);
+    border-radius: 9999px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .badge-kapha {
+    background: rgba(107, 143, 113, 0.15);
+    color: #4a7a52;
+    border: 1px solid rgba(107, 143, 113, 0.3);
+    border-radius: 9999px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  /* Gradient text */
+  .text-gradient-primary {
+    background: linear-gradient(135deg, #2D6A4F, #52B788);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .text-gradient-accent {
+    background: linear-gradient(135deg, #E9C46A, #F4A261);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Nav link underline animation */
+  .nav-link {
+    position: relative;
+    padding-bottom: 2px;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #52B788;
+    border-radius: 1px;
+    transition: width 0.25s ease;
+  }
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+
+  /* Empty state */
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  /* Slider custom */
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, #2D6A4F var(--range-progress, 50%), #e5e7eb var(--range-progress, 50%));
+    outline: none;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #2D6A4F;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(45, 106, 79, 0.3);
+    transition: transform 0.15s ease;
+  }
+  input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+  }
+
+  /* FAB */
+  .fab {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 50;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2D6A4F, #52B788);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 30px -4px rgba(45, 106, 79, 0.5);
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease-in-out;
+    font-size: 1.25rem;
+  }
+  .fab:hover {
+    transform: scale(1.08) translateY(-2px);
+    box-shadow: 0 12px 40px -4px rgba(45, 106, 79, 0.6);
+  }
+  .fab:active {
+    transform: scale(0.97);
+  }
+}
+
+/* ─── Dark Mode Component Overrides ────────────────────────── */
+.dark body {
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+}
+.dark .ayur-card {
+  background: rgba(15, 52, 96, 0.85);
+  border-color: rgba(255,255,255,0.08);
+}
+.dark input[type="range"] {
+  background: linear-gradient(90deg, #52B788 var(--range-progress, 50%), rgba(255,255,255,0.15) var(--range-progress, 50%));
+}
+/* Skeleton shimmer dark */
+.dark .skeleton-shimmer {
+  --skeleton-base: rgba(255,255,255,0.06);
+  --skeleton-highlight: rgba(255,255,255,0.12);
+}
+/* Transition for theme switch */
+*, *::before, *::after {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.2s ease;
+}
+/* But NOT for animations/transforms */
+.page-transition, .ayur-card:hover, .fab, button {
+  transition: all 0.2s ease-in-out;
+}
+/* Loading bar */
+.loading-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #2D6A4F, #52B788);
+  z-index: 9999;
+  transition: width 0.3s ease;
+  border-radius: 0 2px 2px 0;
+}
+.loading-bar.active {
+  animation: loading-bar-progress 1.5s ease-in-out infinite;
+}
+@keyframes loading-bar-progress {
+  0% { width: 0%; opacity: 1; }
+  60% { width: 70%; opacity: 1; }
+  100% { width: 95%; opacity: 0.8; }
+}
+/* Scroll reveal */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: none;
+}
+/* Dot loader */
+.ayur-loader {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+}
+.ayur-loader span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  animation: dot-bounce 1.2s ease-in-out infinite;
+}
+.ayur-loader span:nth-child(2) { animation-delay: 0.2s; }
+.ayur-loader span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes dot-bounce {
+  0%, 80%, 100% { transform: scale(0.7); opacity: 0.5; }
+  40% { transform: scale(1.1); opacity: 1; }
+}
+/* Skeleton shimmer */
+:root {
+  --skeleton-base: #f0f0f0;
+  --skeleton-highlight: #e0e0e0;
+}
+.skeleton-shimmer {
+  background: linear-gradient(90deg, var(--skeleton-base) 25%, var(--skeleton-highlight) 50%, var(--skeleton-base) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 6px;
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+/* Page transitions */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes page-out {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-8px); }
+}
+.page-enter { animation: fadeInUp 0.3s ease forwards; }
+.page-exit { animation: page-out 0.15s ease-in forwards; }
+/* PWA install banner */
+.pwa-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--color-card, white);
+  border-top: 1px solid rgba(45,106,79,0.15);
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 -8px 30px rgba(0,0,0,0.1);
+  animation: slide-up 0.3s ease-out;
+}
+@keyframes slide-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
 }

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AyurWell Navigation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:ital,wght@0,600;0,700;1,600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#fefae0",
+                        "tertiary": "#274f3d",
+                        "inverse-surface": "#323120",
+                        "on-secondary-fixed": "#251a00",
+                        "tertiary-fixed": "#c1ecd4",
+                        "surface-tint": "#2c694e",
+                        "secondary-fixed-dim": "#e7c268",
+                        "on-surface-variant": "#404943",
+                        "on-tertiary-fixed-variant": "#274e3d",
+                        "surface": "#fefae0",
+                        "primary": "#0f5238",
+                        "secondary-fixed": "#ffdf96",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dedbc2",
+                        "surface-container-low": "#f8f4db",
+                        "inverse-primary": "#95d4b3",
+                        "on-primary-container": "#a8e7c5",
+                        "tertiary-container": "#3f6754",
+                        "surface-container-highest": "#e7e3ca",
+                        "on-background": "#1d1c0d",
+                        "inverse-on-surface": "#f5f1d8",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#bfc9c1",
+                        "on-error-container": "#93000a",
+                        "outline": "#707973",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#ede9cf",
+                        "secondary": "#765a05",
+                        "on-surface": "#1d1c0d",
+                        "tertiary-fixed-dim": "#a5d0b9",
+                        "primary-container": "#2d6a4f",
+                        "primary-fixed": "#b1f0ce",
+                        "surface-container": "#f2efd5",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#ffd87c",
+                        "on-secondary-fixed-variant": "#5a4400",
+                        "surface-variant": "#e7e3ca",
+                        "background": "#fefae0",
+                        "primary-fixed-dim": "#95d4b3",
+                        "on-tertiary-container": "#b8e3cb",
+                        "on-tertiary-fixed": "#002114",
+                        "on-primary-fixed": "#002114",
+                        "on-primary-fixed-variant": "#0e5138",
+                        "on-secondary-container": "#795d08",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "2xl": "1rem"
+                    },
+                    "spacing": {
+                        "container-padding-mobile": "20px",
+                        "gutter": "24px",
+                        "base": "8px",
+                        "section-gap": "80px",
+                        "container-padding-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Playfair Display"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "caption": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Ambient Background Texture to match design system guidelines */
+        body {
+            background-color: #fefae0;
+            background-image: radial-gradient(#2d6a4f 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(254, 250, 224, 0.9) 0%, rgba(254, 250, 224, 0.98) 100%);
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-on-surface font-body-md text-body-md antialiased relative">
+<!-- DESKTOP TOP NAV BAR -->
+<header class="docked full-width top-0 sticky bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(45,106,79,0.05)] z-40 border-none">
+<div class="flex justify-between items-center w-full px-container-padding-mobile md:px-container-desktop max-w-[1280px] mx-auto h-[64px] md:h-20">
+<!-- Left: Logo & Brand -->
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">psychiatry</span>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-primary dark:text-primary-fixed font-semibold italic leading-none">AyurWell</span>
+<span class="font-caption text-caption text-tertiary/70 tracking-widest uppercase mt-0.5 hidden md:block" style="font-size: 10px;">Wellness • Wisdom • Balance</span>
+</div>
+</div>
+<!-- Center: Navigation Links (Hidden on Mobile) -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline hover:text-primary transition-colors duration-300 hover:opacity-80 transition-all duration-200 active:scale-95 transition-transform flex items-center gap-1" href="#">
+                    Home
+                </a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline hover:text-primary transition-colors duration-300 hover:opacity-80 transition-all duration-200 active:scale-95 transition-transform flex items-center gap-1" href="#">
+                    Features
+                </a>
+<!-- Active Item -->
+<a class="font-label-md text-label-md text-primary dark:text-primary-fixed border-b-2 border-secondary font-semibold pb-1 hover:opacity-80 transition-all duration-200 active:scale-95 transition-transform flex items-center gap-2 relative" href="#">
+<span class="w-1.5 h-1.5 bg-primary rounded-full absolute -left-3"></span>
+                    Dashboard
+                </a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline hover:text-primary transition-colors duration-300 hover:opacity-80 transition-all duration-200 active:scale-95 transition-transform flex items-center gap-1" href="#">
+                    Diet Plan
+                </a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline hover:text-primary transition-colors duration-300 hover:opacity-80 transition-all duration-200 active:scale-95 transition-transform flex items-center gap-1" href="#">
+                    Analytics
+                </a>
+</nav>
+<!-- Right: User Actions & Mobile Toggle -->
+<div class="flex items-center gap-4">
+<!-- Desktop Right Section -->
+<div class="hidden md:flex items-center gap-4 relative">
+<!-- Pitta Badge -->
+<div class="px-3 py-1 rounded-full bg-primary/10 text-primary font-caption text-caption flex items-center gap-1 border border-primary/20">
+<span class="material-symbols-outlined text-[14px]">local_fire_department</span>
+                        Pitta Dominant
+                    </div>
+<!-- User Avatar -->
+<button class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-label-md text-label-md font-bold shadow-sm hover:opacity-80 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-surface">
+                        KM
+                    </button>
+<!-- Open Dropdown Menu (Forced Open per prompt requirements) -->
+<div class="absolute top-14 right-0 w-64 bg-surface/95 backdrop-blur-xl rounded-2xl shadow-[0_12px_40px_0_rgba(45,106,79,0.1)] border border-surface-container-high overflow-hidden z-50">
+<div class="p-4 border-b border-surface-container-high/50">
+<p class="font-label-md text-label-md text-on-surface">Kiran Mehta</p>
+<p class="font-caption text-caption text-on-surface-variant">kiran.m@example.com</p>
+</div>
+<div class="p-2 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg font-label-md text-label-md text-primary bg-primary/5 hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+                                Dashboard
+                            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">restaurant</span>
+                                Diet Plan
+                            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">analytics</span>
+                                Analytics
+                            </a>
+</div>
+<div class="p-2 border-t border-surface-container-high/50">
+<button class="w-full flex items-center gap-3 px-3 py-2 rounded-lg font-label-md text-label-md text-error hover:bg-error-container/50 transition-colors">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+                                Sign Out
+                            </button>
+</div>
+</div>
+</div>
+<!-- Mobile Hamburger Button -->
+<button class="md:hidden p-2 text-primary hover:bg-surface-container-low rounded-lg transition-colors" id="mobile-menu-btn">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- MOBILE FULL-SCREEN MENU OVERLAY (Hidden by default, structure provided) -->
+<div class="fixed inset-0 z-50 bg-surface flex flex-col hidden md:hidden" id="mobile-menu-overlay">
+<!-- Mobile Menu Header -->
+<div class="flex justify-between items-center w-full px-container-padding-mobile h-[64px] border-b border-surface-container-high/30">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">psychiatry</span>
+<span class="font-headline-md text-headline-md text-primary font-semibold italic">AyurWell</span>
+</div>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-colors" id="close-mobile-menu">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+</div>
+<!-- Mobile Navigation Links -->
+<nav class="flex-1 overflow-y-auto px-container-padding-mobile py-8 flex flex-col gap-6">
+<a class="font-headline-md text-headline-md text-on-surface-variant opacity-70 flex items-center gap-4" href="#">
+<span class="material-symbols-outlined text-3xl">home</span> Home
+            </a>
+<a class="font-headline-md text-headline-md text-on-surface-variant opacity-70 flex items-center gap-4" href="#">
+<span class="material-symbols-outlined text-3xl">spa</span> Features
+            </a>
+<a class="font-headline-md text-headline-md text-primary font-semibold flex items-center gap-4" href="#">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">dashboard</span> Dashboard
+                <span class="w-2 h-2 bg-secondary rounded-full ml-auto"></span>
+</a>
+<a class="font-headline-md text-headline-md text-on-surface-variant opacity-70 flex items-center gap-4" href="#">
+<span class="material-symbols-outlined text-3xl">restaurant</span> Diet Plan
+            </a>
+<a class="font-headline-md text-headline-md text-on-surface-variant opacity-70 flex items-center gap-4" href="#">
+<span class="material-symbols-outlined text-3xl">analytics</span> Analytics
+            </a>
+</nav>
+<!-- Mobile User Footer -->
+<div class="p-container-padding-mobile bg-surface-container-low border-t border-surface-container-highest/50">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-md text-[18px] font-bold">
+                        KM
+                    </div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Kiran Mehta</p>
+<div class="px-2 py-0.5 mt-1 rounded-full bg-surface-bright text-primary font-caption text-caption inline-flex items-center gap-1 border border-primary/10">
+<span class="material-symbols-outlined text-[12px]">local_fire_department</span> Pitta
+                        </div>
+</div>
+</div>
+</div>
+<button class="w-full py-3 flex justify-center items-center gap-2 rounded-xl border border-outline-variant text-on-surface font-label-md text-label-md hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">logout</span> Sign Out
+            </button>
+</div>
+</div>
+<!-- Main Content Canvas (Empty for demonstration) -->
+<main class="w-full max-w-[1280px] mx-auto px-container-padding-mobile md:px-container-desktop py-section-gap min-h-[819px]">
+<!-- Page content would go here -->
+</main>
+<script>
+        // Simple script to toggle the mobile menu for demonstration
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const closeMobileMenuBtn = document.getElementById('close-mobile-menu');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuOverlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling on main canvas
+        });
+
+        closeMobileMenuBtn.addEventListener('click', () => {
+            mobileMenuOverlay.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+    </script>
+</body></html>

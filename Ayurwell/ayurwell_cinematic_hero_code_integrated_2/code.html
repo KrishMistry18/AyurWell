@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AyurWell - Discover Your Dosha</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,600&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#fefae0",
+                        "tertiary": "#274f3d",
+                        "inverse-surface": "#323120",
+                        "on-secondary-fixed": "#251a00",
+                        "tertiary-fixed": "#c1ecd4",
+                        "surface-tint": "#2c694e",
+                        "secondary-fixed-dim": "#e7c268",
+                        "on-surface-variant": "#404943",
+                        "on-tertiary-fixed-variant": "#274e3d",
+                        "surface": "#fefae0",
+                        "primary": "#0f5238",
+                        "secondary-fixed": "#ffdf96",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#dedbc2",
+                        "surface-container-low": "#f8f4db",
+                        "inverse-primary": "#95d4b3",
+                        "on-primary-container": "#a8e7c5",
+                        "tertiary-container": "#3f6754",
+                        "surface-container-highest": "#e7e3ca",
+                        "on-background": "#1d1c0d",
+                        "inverse-on-surface": "#f5f1d8",
+                        "error-container": "#ffdad6",
+                        "outline-variant": "#bfc9c1",
+                        "on-error-container": "#93000a",
+                        "outline": "#707973",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#ede9cf",
+                        "secondary": "#765a05",
+                        "on-surface": "#1d1c0d",
+                        "tertiary-fixed-dim": "#a5d0b9",
+                        "primary-container": "#2d6a4f",
+                        "primary-fixed": "#b1f0ce",
+                        "surface-container": "#f2efd5",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#ffd87c",
+                        "on-secondary-fixed-variant": "#5a4400",
+                        "surface-variant": "#e7e3ca",
+                        "background": "#fefae0",
+                        "primary-fixed-dim": "#95d4b3",
+                        "on-tertiary-container": "#b8e3cb",
+                        "on-tertiary-fixed": "#002114",
+                        "on-primary-fixed": "#002114",
+                        "on-primary-fixed-variant": "#0e5138",
+                        "on-secondary-container": "#795d08",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-padding-mobile": "20px",
+                        "gutter": "24px",
+                        "base": "8px",
+                        "section-gap": "80px",
+                        "container-padding-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Playfair Display"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "caption": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}]
+                    },
+                    "animation": {
+                        'fade-down': 'fadeDown 0.8s ease-out forwards',
+                        'fade-up': 'fadeUp 0.8s ease-out forwards',
+                        'grow-line': 'growLine 1s ease-out 0.5s forwards',
+                        'spin-slow': 'spin 20s linear infinite',
+                        'shimmer': 'shimmer 2.5s infinite',
+                        'bounce-slow': 'bounce 2s infinite',
+                    },
+                    "keyframes": {
+                        fadeDown: {
+                            '0%': { opacity: '0', transform: 'translateY(-20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        growLine: {
+                            '0%': { width: '0' },
+                            '100%': { width: '100%' },
+                        },
+                        shimmer: {
+                            '100%': { transform: 'translateX(100%)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .grain-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 50;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+        }
+
+        /* Orbital Animation Styles */
+        .orbit-scene {
+            perspective: 1200px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .orbit-center {
+            position: relative;
+            width: 0;
+            height: 0;
+            transform-style: preserve-3d;
+            transform: rotateX(-5deg); /* Slight top-down tilt */
+        }
+        .orbit-card {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform-origin: center;
+        }
+        .card-pitta {
+            animation: orbit-pitta 24s linear infinite;
+            margin-left: -160px; /* half of 320px */
+            margin-top: -105px;
+        }
+        .card-kapha {
+            animation: orbit-kapha 24s linear infinite;
+            margin-left: -140px; /* half of 280px */
+            margin-top: -85px;
+        }
+        .card-vata {
+            animation: orbit-vata 24s linear infinite;
+            margin-left: -140px; /* half of 280px */
+            margin-top: -85px;
+        }
+
+        /* 
+           Using rotateY for 3D orbit and a counter-rotation so cards always face forward.
+           Starting angles: Pitta (0deg), Kapha (120deg), Vata (240deg). 
+        */
+        @keyframes orbit-pitta {
+            from { transform: rotateY(0deg) translateZ(260px) rotateY(0deg); }
+            to { transform: rotateY(360deg) translateZ(260px) rotateY(-360deg); }
+        }
+        @keyframes orbit-kapha {
+            from { transform: rotateY(120deg) translateZ(260px) rotateY(-120deg); }
+            to { transform: rotateY(480deg) translateZ(260px) rotateY(-480deg); }
+        }
+        @keyframes orbit-vata {
+            from { transform: rotateY(240deg) translateZ(260px) rotateY(-240deg); }
+            to { transform: rotateY(600deg) translateZ(260px) rotateY(-600deg); }
+        }
+    </style>
+</head>
+<body class="bg-[#FEFAE0] text-on-surface antialiased overflow-x-hidden relative min-h-screen">
+<div class="grain-overlay"></div>
+<!-- TopNavBar -->
+<nav class="bg-[#FEFAE0]/70 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.03)] border-b border-white/20 docked full-width top-0 sticky z-50 animate-fade-down">
+<div class="flex justify-between items-center w-full px-container-desktop max-w-[1280px] mx-auto h-20">
+<div class="font-headline-md text-headline-md text-primary dark:text-primary-fixed font-semibold italic tracking-tight hover:opacity-80 transition-opacity cursor-pointer">AyurWell</div>
+<ul class="hidden md:flex gap-8">
+<li><a class="text-primary dark:text-primary-fixed border-b-2 border-secondary font-semibold pb-1 font-label-md text-label-md transition-all duration-200" href="#">Home</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-md text-label-md relative group" href="#">
+                    Features
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-md text-label-md relative group" href="#">
+                    Dashboard
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-md text-label-md relative group" href="#">
+                    Diet Plan
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors duration-300 font-label-md text-label-md relative group" href="#">
+                    Analytics
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+</a></li>
+</ul>
+<div class="flex items-center gap-4">
+<button class="hidden md:flex bg-primary text-white font-label-md text-label-md px-6 py-2.5 rounded-full hover:bg-[#163f2b] shadow-md hover:shadow-lg transition-all duration-300 active:scale-95">Get Started</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-300 active:scale-95">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">person</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<main class="relative w-full min-h-[calc(100vh-80px)] flex flex-col lg:flex-row px-container-mobile lg:px-container-desktop max-w-[1440px] mx-auto overflow-hidden">
+<!-- Background Mandala -->
+<div class="absolute top-0 right-0 w-[800px] h-[800px] opacity-10 pointer-events-none -mt-32 -mr-32 animate-spin-slow z-0">
+<svg viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<path d="M50 0 L55 40 L95 45 L55 50 L50 90 L45 50 L5 45 L45 40 Z" fill="#2d6a4f" opacity="0.5"></path>
+<circle cx="50" cy="50" fill="none" r="30" stroke="#2d6a4f" stroke-width="0.5"></circle>
+<path d="M50 15 L53 35 L70 30 L55 45 L85 50 L55 55 L70 70 L53 65 L50 85 L47 65 L30 70 L45 55 L15 50 L45 45 L30 30 L47 35 Z" fill="none" stroke="#2d6a4f" stroke-width="0.5"></path>
+</svg>
+</div>
+<!-- Left Content (55%) -->
+<div class="w-full lg:w-[55%] flex flex-col justify-center pt-16 lg:pt-0 pb-20 lg:pb-0 z-10 relative pl-4 lg:pl-8">
+<div class="inline-flex items-center gap-2 bg-white/50 backdrop-blur-sm border border-primary/10 rounded-full px-5 py-2 mb-8 w-fit shadow-sm relative overflow-hidden group animate-fade-up" style="animation-delay: 0.1s;">
+<div class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent group-hover:animate-[shimmer_1.5s_infinite]"></div>
+<span class="text-primary text-sm animate-pulse">🌿</span>
+<span class="font-label-md text-label-md text-primary tracking-wide uppercase text-xs font-semibold">Ancient Wisdom • Modern Science</span>
+</div>
+<h1 class="font-display-lg-mobile lg:font-display-lg text-display-lg-mobile lg:text-display-lg text-[#1a1a1a] mb-6 flex flex-col gap-2 animate-fade-up" style="animation-delay: 0.2s;">
+<span>Discover Your</span>
+<span class="relative w-fit text-primary text-5xl lg:text-7xl italic font-bold tracking-tight pb-2">
+                    Dosha.
+                    <span class="absolute bottom-0 left-0 h-1.5 bg-secondary rounded-full animate-grow-line" style="width: 0;"></span>
+</span>
+<span>Transform Your Life.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-gray-600 max-w-xl mb-10 leading-relaxed animate-fade-up" style="animation-delay: 0.3s;">
+                Unlock personalized wellness plans rooted in 5,000 years of Ayurvedic tradition, elevated by modern health analytics.
+            </p>
+<div class="flex flex-col sm:flex-row gap-5 mb-12 animate-fade-up" style="animation-delay: 0.4s;">
+<button class="bg-gradient-to-r from-[#1B4332] to-[#2D6A4F] text-white font-label-md text-label-md px-8 py-4 rounded-full shadow-[0_8px_20px_rgba(45,106,79,0.25)] hover:shadow-[0_12px_25px_rgba(45,106,79,0.35)] hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3 group">
+                    Take Free Assessment
+                    <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<button class="bg-white/40 backdrop-blur-sm border border-primary/20 text-primary font-label-md text-label-md px-8 py-4 rounded-full hover:bg-white/60 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center shadow-sm">
+                    Explore Plans
+                </button>
+</div>
+<div class="flex flex-wrap gap-6 items-center animate-fade-up" style="animation-delay: 0.5s;">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-base">check_circle</span>
+<span class="font-caption text-sm text-gray-600 font-medium">Free Assessment</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-base">check_circle</span>
+<span class="font-caption text-sm text-gray-600 font-medium">Personalized Plans</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-base">check_circle</span>
+<span class="font-caption text-sm text-gray-600 font-medium">Evidence-Based</span>
+</div>
+</div>
+</div>
+<!-- Right Visual (45%) -->
+<div class="w-full lg:w-[45%] relative h-[600px] lg:h-auto flex items-center justify-center z-10 perspective-1000 mt-10 lg:mt-0">
+<div class="orbit-scene">
+<div class="orbit-center">
+<!-- Vata Card -->
+<div class="orbit-card card-vata bg-white/70 backdrop-blur-lg rounded-2xl p-6 w-[280px] shadow-[0_20px_40px_rgba(0,0,0,0.04)] border border-blue-100 bg-gradient-to-br from-blue-50/80 to-white/50">
+<div class="flex items-center justify-between mb-4">
+<span class="text-4xl drop-shadow-sm">🌬️</span>
+<div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined text-blue-600 text-sm">air</span>
+</div>
+</div>
+<h3 class="font-headline-md text-2xl text-gray-800 mb-1 font-bold">Vata</h3>
+<p class="font-caption text-sm text-gray-500 mb-4">Air &amp; Space</p>
+<div class="h-1.5 w-full bg-blue-100 rounded-full overflow-hidden">
+<div class="h-full bg-blue-400 rounded-full transition-all duration-1000 ease-out" style="width: 75%; animation: growLine 1.5s ease-out forwards;"></div>
+</div>
+</div>
+<!-- Kapha Card -->
+<div class="orbit-card card-kapha bg-white/70 backdrop-blur-lg rounded-2xl p-6 w-[280px] shadow-[0_20px_40px_rgba(0,0,0,0.04)] border border-green-100 bg-gradient-to-br from-[#e8f5e9]/80 to-white/50">
+<div class="flex items-center justify-between mb-4">
+<span class="text-4xl drop-shadow-sm">🌿</span>
+<div class="w-10 h-10 rounded-full bg-[#c8e6c9] flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined text-[#2e7d32] text-sm">water_drop</span>
+</div>
+</div>
+<h3 class="font-headline-md text-2xl text-gray-800 mb-1 font-bold">Kapha</h3>
+<p class="font-caption text-sm text-gray-500 mb-4">Earth &amp; Water</p>
+<div class="h-1.5 w-full bg-[#c8e6c9] rounded-full overflow-hidden">
+<div class="h-full bg-[#4caf50] rounded-full transition-all duration-1000 ease-out" style="width: 60%; animation: growLine 1.5s ease-out forwards;"></div>
+</div>
+</div>
+<!-- Pitta Card -->
+<div class="orbit-card card-pitta bg-[#FFFDF5]/95 backdrop-blur-xl rounded-2xl p-8 w-[320px] shadow-[0_30px_60px_rgba(212,175,55,0.15)] border border-[#f5df99]/40 bg-gradient-to-br from-[#FFFDF5] to-[#FCF4D9]">
+<div class="flex items-center justify-between mb-6">
+<span class="text-5xl drop-shadow-md">🔥</span>
+<div class="w-12 h-12 rounded-full bg-[#fce4a1] flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined text-[#b07d00] text-lg">local_fire_department</span>
+</div>
+</div>
+<h3 class="font-headline-lg text-4xl text-[#8b6508] mb-2 font-bold">Pitta</h3>
+<p class="font-body-md text-gray-600 mb-6">Fire &amp; Water</p>
+<div class="flex items-center justify-between font-caption text-sm text-gray-600 mb-3">
+<span>Metabolism</span>
+<span class="font-medium text-[#b07d00]">High</span>
+</div>
+<div class="h-2 w-full bg-[#f0e6c8] rounded-full overflow-hidden shadow-inner">
+<div class="h-full bg-gradient-to-r from-[#d4af37] to-[#b07d00] rounded-full transition-all duration-1500 ease-out" style="width: 85%; animation: growLine 1.5s ease-out forwards;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Scroll Hint -->
+<div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60 animate-fade-up z-20" style="animation-delay: 1s;">
+<span class="font-caption text-xs uppercase tracking-widest text-primary font-semibold">Scroll</span>
+<div class="w-6 h-10 border-2 border-primary rounded-full flex justify-center p-1">
+<div class="w-1.5 h-1.5 bg-primary rounded-full animate-bounce-slow"></div>
+</div>
+</div>
+</main>
+</body></html>

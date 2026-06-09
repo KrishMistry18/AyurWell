@@ -1,7 +1,15 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { API_BASE_URL } from "@/lib/utils";
+import { 
+  signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword, 
+  signOut, 
+  onAuthStateChanged,
+  updateProfile,
+  User as FirebaseUser
+} from "firebase/auth";
+import { auth } from "@/lib/firebase";
 
-type User = { username: string; name?: string } | null;
+type User = { username: string; name?: string; uid?: string } | null;
 
 type AuthContextType = {
   user: User;
@@ -16,65 +24,59 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [token, setToken] = useState<string | null>(() => localStorage.getItem("auth_token"));
   const [user, setUser] = useState<User>(null);
-
-  const isAuthenticated = Boolean(token);
-
-  const refreshMe = useCallback(async () => {
-    if (!token) {
-      setUser(null);
-      return;
-    }
-    try {
-      const res = await fetch(`${API_BASE_URL}/api/auth/me/`, {
-        headers: { Authorization: `Token ${token}` },
-      });
-      if (res.ok) {
-        const data = await res.json();
-        setUser({ username: data.username, name: data.name });
-      } else {
-        setUser(null);
-      }
-    } catch {
-      setUser(null);
-    }
-  }, [token]);
+  const [token, setToken] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    refreshMe();
-  }, [refreshMe]);
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      if (firebaseUser) {
+        const idToken = await firebaseUser.getIdToken();
+        setToken(idToken);
+        localStorage.setItem("auth_token", idToken);
+        setUser({
+          uid: firebaseUser.uid,
+          username: firebaseUser.displayName || firebaseUser.email?.split("@")[0] || "User",
+          name: firebaseUser.displayName || "User",
+        });
+      } else {
+        setToken(null);
+        setUser(null);
+        localStorage.removeItem("auth_token");
+      }
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const isAuthenticated = Boolean(user);
+
+  const refreshMe = useCallback(async () => {
+    if (auth.currentUser) {
+      const idToken = await auth.currentUser.getIdToken(true);
+      setToken(idToken);
+      localStorage.setItem("auth_token", idToken);
+    }
+  }, []);
 
   const login = useCallback(async (email: string, password: string) => {
-    const res = await fetch(`${API_BASE_URL}/api/auth/login/`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    if (!res.ok) throw new Error("Login failed");
-    const data = await res.json();
-    localStorage.setItem("auth_token", data.token);
-    setToken(data.token);
-    setUser({ username: data.username, name: data.name });
+    await signInWithEmailAndPassword(auth, email, password);
   }, []);
 
   const register = useCallback(async (name: string, email: string, password: string) => {
-    const res = await fetch(`${API_BASE_URL}/api/auth/register/`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password }),
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    await updateProfile(userCredential.user, { displayName: name });
+    // Update local state immediately after profile update
+    setUser({
+      uid: userCredential.user.uid,
+      username: name,
+      name: name,
     });
-    if (!res.ok) throw new Error("Signup failed");
-    const data = await res.json();
-    localStorage.setItem("auth_token", data.token);
-    setToken(data.token);
-    setUser({ username: data.username, name: data.name });
   }, []);
 
-  const logout = useCallback(() => {
-    localStorage.removeItem("auth_token");
-    setToken(null);
-    setUser(null);
+  const logout = useCallback(async () => {
+    await signOut(auth);
   }, []);
 
   const value = useMemo(
@@ -82,6 +84,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     [user, token, isAuthenticated, login, register, logout, refreshMe]
   );
 
+  // If you want to show a global loader while Firebase initializes, you can do it here.
+  // For now, we'll just render children to not break existing app shell assumptions.
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
@@ -90,5 +94,3 @@ export const useAuth = (): AuthContextType => {
   if (!ctx) throw new Error("useAuth must be used within AuthProvider");
   return ctx;
 };
-
-

@@ -1,24 +1,49 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <link rel="icon" href="/placeholder.svg" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AyurWell - Wellness through Ayurveda</title>
+    <title>AyurWell — Ancient Wisdom, Modern Wellness</title>
     <meta name="description" content="AyurWell blends ancient Ayurvedic wisdom with modern nutrition to guide your daily wellness journey." />
     <meta name="author" content="AyurWell" />
-    <meta name="keywords" content="ayurveda, nutrition, diet plans, wellness, dosha, health management, personalized nutrition" />
+    <meta name="keywords" content="ayurveda, nutrition, diet plans, wellness, dosha, health" />
 
-    <meta property="og:title" content="AyurWell - Wellness through Ayurveda" />
-    <meta property="og:description" content="Personalized routines and diet guidance inspired by Ayurveda and nutrition science." />
+    <!-- Google Fonts & Material Symbols -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#2D6A4F" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- Apple PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="AyurWell" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="apple-touch-icon" href="/icon-192.svg" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" />
+
+    <!-- OG -->
+    <meta property="og:title" content="AyurWell — Ancient Wisdom, Modern Wellness" />
+    <meta property="og:description" content="Personalized Ayurvedic wellness companion." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/favicon.ico" />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@ayurwell" />
-    <meta name="twitter:image" content="/favicon.ico" />
+    <!-- Inline theme script — prevents flash of wrong theme -->
+    <script>
+      (function() {
+        var t = localStorage.getItem('ayurwell-theme') || 'light';
+        var resolved = t === 'system'
+          ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+          : t;
+        if (resolved === 'dark') document.documentElement.classList.add('dark');
+      })();
+    </script>
   </head>
-
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
